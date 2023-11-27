@@ -1,1 +1,28 @@
-<h1>Hello, {{ title }}!</h1>
+<main class="py-4 container">
+  <app-menu [total]="total"/>
+  <header class="p-4 mb-4 bg-light rounded-3">
+    <h1>Bienvenue sur Zenika Ecommerce</h1>
+    <p>Votre panier s'élève à 0 €</p>
+    <p class="mb-0"><a class="btn btn-primary btn-large">Voir mon panier</a></p>
+  </header>
+
+  <h2 class="h4">Catalogue</h2>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    <div class="col">
+      <app-product [product]="products[0]" (addToBasket)="OnAddToBasket()" />
+    </div>
+
+    <div class="col">
+      <app-product [product]="products[1]" (addToBasket)="OnAddToBasket()" />
+    </div>
+
+    <div class="col">
+      <app-product [product]="products[2]" (addToBasket)="OnAddToBasket()" />
+    </div>
+
+    <div class="col">
+      <app-product [product]="products[3]" (addToBasket)="OnAddToBasket()" />
+    </div>
+  </div>
+</main>
