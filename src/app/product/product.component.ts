@@ -12,10 +12,10 @@ export class ProductComponent {
   product!: Product;
 
   @Output()
-  addToBasket = new EventEmitter();
+  addToBasket = new EventEmitter<Product>();
 
   clickAddToBasket() :void {
-    this.addToBasket.emit();
+    this.addToBasket.emit(this.product);
   }
 
 }

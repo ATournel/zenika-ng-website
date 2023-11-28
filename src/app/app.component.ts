@@ -47,8 +47,8 @@ export class AppComponent {
 
   total = 0;
 
-  OnAddToBasket() :void {
-    this.total++;
+  OnAddToBasket(product: Product) :void {
+    this.total += product.price;
   }
 
 
