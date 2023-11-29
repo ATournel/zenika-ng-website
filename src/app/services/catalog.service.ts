@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 import { Product } from '../product/product.types';
 
 @Injectable({
@@ -6,46 +8,15 @@ import { Product } from '../product/product.types';
 })
 export class CatalogService {
 
-  constructor() { }
+  constructor(private readonly httpClient: HttpClient) { }
 
-  private _products: Product[] = [
-    {
-      "id": "welsch",
-      "title": "Coding the welsch",
-      "description": "Tee-shirt col rond - Homme",
-      "photo": "/assets/coding-the-welsch.jpg",
-      "price": 20,
-      "stock": 2
-    },
-    {
-      "id": "world",
-      "title": "Coding the world",
-      "description": "Tee-shirt col rond - Homme",
-      "photo": "/assets/coding-the-world.jpg",
-      "price": 18,
-      "stock": 2
-    },
-        {
-      "id": "vador",
-      "title": "Duck Vador",
-      "description": "Tee-shirt col rond - Femme",
-      "photo": "/assets/coding-the-stars.jpg",
-      "price": 21,
-      "stock": 2
-    },
-    {
-      "id": "snow",
-      "title": "Coding the snow",
-      "description": "Tee-shirt col rond - Femme",
-      "photo": "/assets/coding-the-snow.jpg",
-      "price": 19,
-      "stock": 2
-    }
-  ];  
+  private getProductsUrl = 'http://localhost:8080/api/products';
 
-  get products(): Product[] {
-    return this._products;
-  }
+  private _products: Product[] = [];  
+
+  // get products(): Product[] {
+  //   return this._products;
+  // }
 
   get hasProductsInStock(): boolean {
     return this._products.some(({ stock }) => stock > 0);
@@ -61,4 +32,9 @@ export class CatalogService {
       return true;
     }
   }
+
+  fetchProducts(): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(this.getProductsUrl);
+  }
+
 }

@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 import { BasketItem } from '../basket.types';
 
 @Injectable({
@@ -6,8 +8,9 @@ import { BasketItem } from '../basket.types';
 })
 export class BasketService {
 
-  constructor() { }
+  constructor(private readonly httpClient: HttpClient) { }
 
+  private postProductUrl = 'http://localhost:8080/api/basket';
   private _items: BasketItem[] = [];
 
   get items(): BasketItem[] {
@@ -26,8 +29,12 @@ export class BasketService {
     return totalPrice;
   }
 
-  addItem(item: BasketItem) {
-    this._items.push(item);
+  // addItem(item: BasketItem) {
+  //   this._items.push(item);
+  // }
+
+  addItem(productId: string): Observable<BasketItem> {
+    return this.httpClient.post<BasketItem>(this.postProductUrl, { productId });
   }
 
 }
