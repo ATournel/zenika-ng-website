@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { BasketService } from '../services/basket.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,5 +8,14 @@ import { Component, Input } from '@angular/core';
 })
 export class MenuComponent {
 
+  constructor(private basketService: BasketService) {
+      
+  }
+
+  get total() {
+    return this.basketService.items.length;
+  }
+
+    
 
 }

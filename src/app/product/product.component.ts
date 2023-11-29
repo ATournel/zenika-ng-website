@@ -14,8 +14,9 @@ export class ProductComponent {
   @Output()
   addToBasket = new EventEmitter<Product>();
 
-  clickAddToBasket() :void {
+  clickAddToBasket(): void {
     this.addToBasket.emit(this.product);
+    this.product.stock --;
   }
 
 }
